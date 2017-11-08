@@ -1,5 +1,3 @@
-import numpy as np
-
 def degreeIn(graph, vertex):
     return [graph[i][vertex] for i in range(len(graph))].count(1)
 
@@ -28,13 +26,16 @@ def check(A, B):
                 for i in range(v1):
                     if A[i][v1] != B[isoMap[i]][v2] or A[v1][i] != B[v2][isoMap[i]]:
                         isCanMap = False
+                        break
 
-        if isCanMap:
-            used[v2] = True
-            isoMap[v1] = v2
-            isIsm = findIsomorphism(v1 + 1)
-            if isIsm: return isIsm
-            used[v2] = False
+                if isCanMap:
+                    used[v2] = True
+                    isoMap[v1] = v2
+                    isIsm = findIsomorphism(v1 + 1)
+                    if isIsm: return isIsm
+                    used[v2] = False
+        
+        return False
 
     isIsm = findIsomorphism(0)
     return isIsm
